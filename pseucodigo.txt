@@ -1,0 +1,163 @@
+char buffer[21];
+int operando[3];
+char operador;
+long resultado;
+bandera bufferRXLlena = falso;
+bandera procesoCorrecto = falso;
+bandera mensajePrincipal =  falso;
+bandera mensajeError1 = falso;
+bandera mensajeError2 = falso;
+bandera mensajeError3 = falso;
+bandera mensajeResultado = falso;
+bandera mensajeErrorMatematicas = falso;
+bandera resetError = falso;
+int contador de comas=0;
+int contador de operandos=0;
+int contador de control de unidades=0; //Para unidades, decenas o centenas
+int contador buffer =0;
+
+funcion ingresarDatos	
+	si bandera mensaje es = falso
+		mostrar: "El sintaxis corrector del buffer es >operando1,operando2,operador< "
+			 "Ingresa los datos del buffer:"
+		bandera mensajePrincipal = verdadero.
+	fin si.
+	si hay caracter para leer
+		leer el caracter
+		ingresar caracter al buffer.
+		pintar el caracter agregado
+		si contador buffer mayor a 20 o caracter es = '<'
+			bufferRXllena = verdadero;
+		fin si
+		si no 
+			contador buffer +=1
+		fin si no
+	fin si			
+fin funcion ingresarDatos
+
+funcion verificar buffer
+	contador comas = 0;
+	Si contenido de buffer en posicion 0 es =  '>' y contenido de buffer en posicion de contador buffer es ='<' y si contador buffer es mayor o 7(CAMPOS)
+		recorrer buffer desde posicion 1 hasta una posicion antes de contador buffer.
+			si contenido de buffer en posicion de recorrido actual es = ','
+				contador comas += 1;
+			fin si
+		fin recorrer.
+		si contador comas es mayor a 2
+			si mensajeError2 = falso
+				mostrar error contenido de trama erroneo.
+				mensajeError2 = verdadero;
+				resetear error = verdadero.
+			fin si
+		fin si
+		si no
+			recorrer buffer desde posicion 1 hasta una posicion antes de contador buffer.
+				si contenido de buffer en posicion de recorrido actual es un diferente al rango  entre '0' y '9'
+					si contenido de buffer en posicion de recorrido actual es ','
+						si contador operandos es mayor o igual a 1
+							operador es = contenido de buffer
+							bandera ok = verdadero.
+						fin si
+						si no
+							contador operandos += 1;
+							controlNumero=1;
+						fin si no.
+					fin si
+					si no
+						si mensaje3 = falso;
+							mostrar error caracteres erroneos en la trama.
+							mensaje3 = verdadero;
+							reset error=verdadero.
+						fin si
+					fin si no
+				fin si
+				si no
+					operandos[contador operandos] *= controlNumero;
+					operandos[contador operandos] += contenido de buffer menos '0'.
+					controlNumero *= 10;
+				fin si no
+			fin recorrer
+		fin si no			
+	fin si
+	si no	
+		si bandera mensaje1 == falso	
+			mostrar error trama incompleta.
+			mensaje1 = verdadero;
+			reset error = verdadero.
+		fin si
+	fin si no				
+fin funcion verificar buffer
+
+funcion matematicas 
+	en caso de operador sea = '+'
+		resultado = long operando[0] + long operando [1];
+	fin caso
+	en caso de operador sea = '-'
+		resultado = long operando[0] - long operando [1];
+	fin caso
+	en caso de operador sea = '*'
+		resultado = long operando[0] * long operando [1];
+	fin caso
+	en caso de operador sea = '/'
+		si operando [1] == 0;
+			si mensajErrorMatematicas = falso
+				mostrar error "MATH ERROR"
+				mensajeErrorMatematicas = verdadero.
+				resetError1;
+			fin si.
+		fin si
+		si no
+			resultado = long operando[0] / long operando [1];
+		fin si no
+	fin caso
+fin funcion matematicas
+
+funcion mostrar resultado
+	mostrar resultado en puerto b
+	mostrar resultado en puerto d con recorrido de 8 bits.
+	mostrar mensaje "El resultado resultado;
+	bandera ok = verdadero;
+fin funcion mostrar resultado
+
+funcion limpiar buffer
+	recorrido buffer desde posicion 0 hasta la 10
+		buffer[recorrido] = ' ';
+	operando[0] = 0;
+	operando[1] = 0;
+	operando[2] = 0;
+	resultado = 0;
+	bandera bufferRX = falso;
+	bandera procesoCorrecto = falso;
+	bandera mensajePrincipal =  falso;
+	bandera mensajeError1 = falso;
+	bandera mensajeError2 = falso;
+	bandera mensajeError3 = falso;
+	bandera mensajeResultado = falso;
+	bandera mensajeErrorMatematicas = falso;
+	bandera resetError = falso;
+	contador de comas=0;
+	contador de operandos=0;
+	contador de control de unidades=1;
+	contador buffer =0;
+fin funcion limpiar buffer
+
+funcion principal
+	declaro mi oscilador a 16 mhz.
+	declaro mi puerto B como entrada
+	declaro mi puerto D como entrada
+	mientras 1
+		mandar llamar funcion Ingresar Datos.
+		si bandera bufferRXllena es = verdadero
+			mandar llamar funcion Verificar buffer.
+			si bandera reseterror es igual a verdadero
+				mandar llamar funcion limpiar buffer.
+			fin si
+			si bandera procesoCorrecto es = verdadero
+				mandar llamar funcion Matematicas.
+				si bandera reset al tener error es igual a falso
+					mandar llamar funcion mostrar resultado.
+				mandar llamar funcion limpiar buffer.
+			fin si
+		fin si
+	fin mientras
+fin funcion principal
