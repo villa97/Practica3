@@ -1,5 +1,6 @@
+char aux[5]
 char buffer[21];
-int operando[3];
+long operando[3];
 char operador;
 long resultado;
 bandera bufferRXLlena = falso;
@@ -13,7 +14,7 @@ bandera mensajeErrorMatematicas = falso;
 bandera resetError = falso;
 int contador de comas=0;
 int contador de operandos=0;
-int contador de control de unidades=0; //Para unidades, decenas o centenas
+int contador de auxiliar=0;
 int contador buffer =0;
 
 funcion ingresarDatos	
@@ -45,22 +46,24 @@ funcion verificar buffer
 		fin recorrer.
 		si contador comas es mayor a 2
 			si mensajeError2 = falso
-				mostrar error contenido de trama erroneo.
+				mostrar error contenido de buffer erroneo.
 				mensajeError2 = verdadero;
 				resetear error = verdadero.
 			fin si
 		fin si
 		si no
 			recorrer buffer desde posicion 1 hasta una posicion antes de contador buffer.
-				si contenido de buffer en posicion de recorrido actual es un diferente al rango  entre '0' y '9'
+				si contenido de buffer en posicion de recorrido actual es un diferente al rango  entre '0' - '9' o es igual a coma
 					si contenido de buffer en posicion de recorrido actual es ','
 						si contador operandos es mayor o igual a 1
 							operador es = contenido de buffer
 							bandera ok = verdadero.
 						fin si
 						si no
+							operandos[contador operandos] = atoi32(aux);
 							contador operandos += 1;
-							controlNumero=1;
+							control auxiliar = 0;
+							toda la cadea auxiliar = 0;
 						fin si no.
 					fin si
 					si no
@@ -72,10 +75,8 @@ funcion verificar buffer
 					fin si no
 				fin si
 				si no
-					operandos[contador operandos] *= controlNumero;
-					operandos[contador operandos] += contenido de buffer menos '0'.
-					controlNumero *= 10;
-				fin si no
+					aux[control auxiliar] = buffer[recorrido]
+					control auxiliar +=1 ;
 			fin recorrer
 		fin si no			
 	fin si
@@ -116,7 +117,7 @@ funcion mostrar resultado
 	mostrar resultado en puerto b
 	mostrar resultado en puerto d con recorrido de 8 bits.
 	mostrar mensaje "El resultado resultado;
-	bandera ok = verdadero;
+	bandera proceso correcto = verdadero;
 fin funcion mostrar resultado
 
 funcion limpiar buffer
