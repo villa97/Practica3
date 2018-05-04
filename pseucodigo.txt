@@ -47,6 +47,7 @@ funcion verificar buffer
 		si contador comas es mayor a 2
 			si mensajeError2 = falso
 				mostrar error contenido de buffer erroneo.
+				prender todos los leds.
 				mensajeError2 = verdadero;
 				resetear error = verdadero.
 			fin si
@@ -69,6 +70,7 @@ funcion verificar buffer
 					si no
 						si mensaje3 = falso;
 							mostrar error caracteres erroneos en la trama.
+							prender todos los leds.
 							mensaje3 = verdadero;
 							reset error=verdadero.
 						fin si
@@ -83,6 +85,7 @@ funcion verificar buffer
 	si no	
 		si bandera mensaje1 == falso	
 			mostrar error trama incompleta.
+			prender todos los leds.
 			mensaje1 = verdadero;
 			reset error = verdadero.
 		fin si
@@ -103,6 +106,7 @@ funcion matematicas
 		si operando [1] == 0;
 			si mensajErrorMatematicas = falso
 				mostrar error "MATH ERROR"
+				prender todos los leds.
 				mensajeErrorMatematicas = verdadero.
 				resetError1;
 			fin si.
@@ -140,6 +144,8 @@ funcion limpiar buffer
 	contador de operandos=0;
 	contador de control de unidades=1;
 	contador buffer =0;
+	hacer una pausa de 150 milisegundos para apreciar la alerta.
+	apagar todos los leds.
 fin funcion limpiar buffer
 
 funcion principal
