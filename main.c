@@ -52,7 +52,7 @@ void ingresaDatos(void)
 void verificarBuffer(void)
 {  
     contadorComas=0;
-    if(buffer[0]=='>' && buffer[contadorBuffer]=='<' && contadorBuffer>6)
+    if(buffer[0]=='>' && buffer[contadorBuffer]=='<' && contadorBuffer>5)
        {
           for(int cont1=1;cont1<contadorBuffer-1;cont1++)
              {
@@ -66,6 +66,8 @@ void verificarBuffer(void)
              if(mensajeError2==0)
              {
               printf("Contenido de buffer incorrecto.\r\n\n\r");
+              output_b(0xff);
+              output_d(0xff);
               mensajeError2=1;
               resetError=1;
              }
@@ -97,6 +99,8 @@ void verificarBuffer(void)
                              if(mensajeError3==0)
                                 {
                                   printf("Caracteres invalidos.\r\n\n\r");
+                                  output_b(0xff);
+                                  output_d(0xff);
                                   resetError=1;
                                   mensajeError3=1;
                                 }
@@ -116,6 +120,8 @@ void verificarBuffer(void)
       if(mensajeError1==0)
         {
          printf("Trama Incompleta.\n\r\n\r");
+         output_b(0xff);
+         output_d(0xff);
          mensajeError1=1;
          resetError=1;
        }
@@ -142,6 +148,8 @@ void matematicas(void)
                 if(mensajeErrorMatematicas==0)
                 {
                     printf("MATH ERROR\n\r\n\r");
+                    output_b(0xff);
+                    output_d(0xff);
                     mensajeErrorMatematicas=1;
                     resetError=1;
                 }
@@ -188,8 +196,10 @@ void limpiarBuffer(void)
     resetError=0;
     contadorComas = 0;
     contadorOperandos = 0;
-    controlNumero=0;
-    
+    controlAux=0;
+    delay_ms(150);
+    output_b(0x00);
+    output_d(0x00);
 }
 //---Funcion Principal---
 void main (void)
